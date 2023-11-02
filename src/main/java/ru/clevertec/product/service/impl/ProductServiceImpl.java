@@ -1,14 +1,14 @@
 package ru.clevertec.product.service.impl;
 
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import ru.clevertec.product.data.InfoProductDto;
 import ru.clevertec.product.data.ProductDto;
+import ru.clevertec.product.entity.Product;
 import ru.clevertec.product.mapper.ProductMapper;
 import ru.clevertec.product.repository.ProductRepository;
 import ru.clevertec.product.service.ProductService;
-
-import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -28,7 +28,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public UUID create(ProductDto productDto) {
-        return null;
+        Product product = mapper.toProduct(productDto);
+        Product saved = productRepository.save(product);
+        return saved.getUuid();
+//        return null;
     }
 
     @Override
@@ -38,6 +41,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(UUID uuid) {
-
+//        productRepository.delete(uuid);
     }
 }
